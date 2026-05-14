@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+          href="/css/styles.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<%- include('partials/header') %>
+<main class="main-content">
+<div class="container">
+
+    <div class="header">
+
+        <h1>⚡ LISTA DE SUPERHEROES ⚡</h1>
+
+       
+    </div>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Buscar superhéroe..."
+        >
+
+    </div>
+
+    <table class="table">
+
+        <thead>
+
+            <tr>
+
+                <th>Héroe</th>
+                <th>Nombre Real</th>
+                <th>Edad</th>
+                <th>Planeta</th>
+                <th>Creador</th>
+                <th>Acciones</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <% heroes.forEach(hero => { %>
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            <%= hero.nombreSuperHeroe %>
+                        </strong>
+                    </td>
+
+                    <td><%= hero.nombreReal %></td>
+
+                    <td><%= hero.edad %></td>
+
+                    <td><%= hero.planetaOrigen %></td>
+
+                    <td><%= hero.creador %></td>
+
+                    <td>
+
+                        <a
+                            href="/heroes/<%= hero._id %>/editar"
+                            class="btn btn-edit"
+                        >
+                            Editar
+                        </a>
+                        
+                        <form
+                            action="/heroes/<%= hero._id %>?_method=DELETE"
+                            method="POST"
+                            style="display:inline; margin-left: 8px;"
+                        >
+
+                            <button
+                                class="btn btn-delete"
+                                onclick="return confirm('¿Seguro que querés eliminar?')"
+                            >
+                                Eliminar
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+            <% }) %>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script>
+
+const input = document.getElementById('searchInput');
+
+input.addEventListener('keyup', function () {
+
+    const filtro = input.value.toLowerCase();
+
+    const filas = document.querySelectorAll('tbody tr');
+
+    filas.forEach(fila => {
+
+        const texto = fila.innerText.toLowerCase();
+
+        fila.style.display =
+            texto.includes(filtro)
+                ? ''
+                : 'none';
+    });
+});
+
+</script>
+</main>
+<%- include('partials/footer') %>
+</body>
+</html>

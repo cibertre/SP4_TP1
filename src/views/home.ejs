@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Inicio</title>
+
+    <link rel="stylesheet"
+          href="/css/styles.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<%- include('partials/header') %>
+<main class="main-content">
+<div class="hero-home">
+    <div class="hero-overlay">
+    <h1>
+        ⚡ SuperApp ⚡
+    </h1>
+
+    <p>
+        Sistema de gestión de superhéroes MVC con Node.js,
+        Express y MongoDB.
+    </p>
+    </div>
+    <div class="home-buttons">
+
+        <a href="/heroes" class="btn btn-add">
+            Ver Superhéroes
+        </a>
+
+        <a href="/heroes/agregar" class="btn btn-edit">
+            Agregar Superhéroe
+        </a>
+
+    </div>
+
+</div>
+</main>
+<%- include('partials/footer') %>
+</body> 
+</html>

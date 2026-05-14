@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Editar Superhéroe</title>
+
+    <link rel="stylesheet"
+          href="/css/styles.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<%- include('partials/header') %>
+<main class="main-content">
+<div class="container">
+
+    <div class="form-card">
+        <h2>✏️ Editar Superhéroe</h2>
+        <% if (errores && errores.length > 0) { %>
+
+    <ul class="error-list">
+
+        <% errores.forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+
+    </ul>
+
+<% } %>
+
+        <form action="/heroes/<%= hero._id %>?_method=PUT" method="POST">
+
+            <div class="form-group">
+                <label>Nombre Héroe</label>
+                <input type="text" name="nombreSuperHeroe" value="<%= hero.nombreSuperHeroe %>">
+            </div>
+
+            <div class="form-group">
+                <label>Nombre Real</label>
+                <input name="nombreReal" value="<%= hero.nombreReal %>">
+            </div>
+
+            <div class="form-group">
+                <label>Edad</label>
+                <input name="edad" min="1" value="<%= hero.edad %>">
+            </div>
+            <div class="form-group">
+                <label>Planeta</label>
+                <input name="planetaOrigen" value="<%= hero.planetaOrigen || '' %>">
+            </div>
+            <div class="form-group">
+                <label>Poderes</label>
+                <input name="poderes" value="<%= Array.isArray(hero.poderes) ? hero.poderes.join(', ')
+        : hero.poderes || '' %>">
+            </div>
+            <div class="form-group">
+                 <label>Debilidad</label>
+                <input name="debilidad" value="<%= hero.debilidad || '' %>" placeholder="Kryptonita, fuego, magia..."
+    >
+            </div>
+            <div class="form-group">
+                 <label>Creador</label>
+                <input type="text" name="creador" value="<%= hero.creador || '' %>"
+        placeholder="Stan Lee, Bob Kane..."
+    >
+</div>
+             
+            <button class="btn btn-edit">Actualizar</button>
+            <a href="/heroes" class="btn btn-back">Volver</a>
+
+        </form>
+    </div>
+
+</div>
+</main>
+<%- include('partials/footer') %>
+</body>
+</html>
